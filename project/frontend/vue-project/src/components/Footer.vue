@@ -1,7 +1,7 @@
 <template>
   <footer class="footer">
     <span>
-      Make with
+      make with
       <span class="heart"></span>
       by <a href="http://github.com/marcosdias">Marcos Dias</a>
     </span>
