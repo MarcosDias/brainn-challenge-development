@@ -10,7 +10,16 @@
 <script>
 export default {
   name: 'Button',
-  props: [ 'label' ]
+  props: {
+    // onClick: {
+    //   type: Function,
+    //   required: true
+    // },
+    label: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
 
