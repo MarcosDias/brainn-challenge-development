@@ -1,0 +1,32 @@
+@import './variable';
+
+.container {
+    padding: 0 5vw;
+}
+
+.input-style {
+    border: 2px solid $black-color;
+    color: $black-color;
+    border-radius: $size-radius;
+}
+
+.input {
+    @extend .input-style;
+    width: 200px;
+    padding: 5px 10px;
+}
+
+.btn {
+    border: $border-config;
+    padding: 5px 30px;
+    border-radius: $size-radius;
+    background-color: $black-color;
+    color: $white-color;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: $white-color;
+    color: $black-color;
+    border: $border-config;
+}
