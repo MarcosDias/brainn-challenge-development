@@ -18,9 +18,11 @@
           <td>{{repo.description}}</td>
           <td>{{repo.language}}</td>
           <td>
-            <input-tag
-              v-if="!!repo.tags && repo.tags.length"
-              v-model="repo.tags"
+            <Tag
+              v-if="!!repo.tags && !!repo.tags.length"
+              v-for="(tag, index) in repo.tags"
+              :key="index"
+              :name="`#${tag}`"
               :read-only="true" />
           </td>
           <td>
@@ -39,25 +41,25 @@
 
 <script>
 import Modal from '@/components/Modal'
+import Tag from '@/components/Tag'
 
 export default {
   name: 'SearchadbleTable',
   props: [ 'data', 'search' ],
-  components: { Modal },
+  components: { Modal, Tag },
   data: () => ({
     isModalVisible: false,
-    selectedRepository: null,
-    dataFiltered: []
+    selectedRepository: null
   }),
-  mounted () {
-    const hasSearch = !!this.search
-
-    if (hasSearch) {
-      this.dataFiltered = this.data.filter(repo => {
-        return repo.tags.includes(this.search)
-      })
-    } else {
-      this.dataFiltered = this.data
+  computed: {
+    dataFiltered () {
+      const hasSearch = !!this.search
+      if (hasSearch) {
+        return this.data.filter(repo => {
+          return !!repo.tags && repo.tags.includes(this.search)
+        })
+      }
+      return this.data
     }
   },
   methods: {
@@ -78,6 +80,7 @@ export default {
 
 table {
   width: 100%;
+  display: table;
 
   th {
     text-align: left;
