@@ -1,6 +1,7 @@
 <template>
-  <header id="header">
-    <h1 class="container logo">githubstars</h1>
+  <header class="header container">
+    <h1 class="header__logo">githubstars</h1>
+    <router-link class="header__menu" to="/" v-if="$route.path !== '/'">home</router-link>
   </header>
 </template>
 
@@ -12,15 +13,23 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/variable';
+@import '../assets/style/common';
 
-#header {
+.header {
   background: $black-color;
-  padding: 30px;
-}
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  display: flex;
+  justify-content: space-between;
 
-.logo {
-  color: $white-color;
-  font-size: 1.7em;
-  font-weight: bold;
+  &__logo {
+    color: $white-color;
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+
+  &__menu {
+    color: #fff;
+  }
 }
 </style>

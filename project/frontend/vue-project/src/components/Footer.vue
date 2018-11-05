@@ -3,7 +3,7 @@
     <span>
       make with
       <span class="heart"></span>
-      by <a href="http://github.com/marcosdias">Marcos Dias</a>
+      by <a class="footer__self-link" href="http://github.com/marcosdias">Marcos Dias</a>
     </span>
   </footer>
 </template>
@@ -27,7 +27,7 @@ export default {
   text-align: center;
   padding:  1em;
 
-  a {
+  &__self-link {
     color: $white-color;
     text-decoration: underline;
   }

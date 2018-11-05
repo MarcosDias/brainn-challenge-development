@@ -3,13 +3,13 @@
 
     <div>
 
-      <div class="main--box" v-if="!request">
-        <div class="main--label-input">
+      <div class="main__box" v-if="!request">
+        <div class="main__label-input">
           <span>https://github.com/</span>
-          <input class="main--input" type="text" placeholder="username">
+          <input class="input" type="text" placeholder="username" v-model="username">
         </div>
 
-        <div class="main--btn">
+        <div class="main__btn">
           <btn label="get repositories" @click.native="findRepositoriesByUser" />
         </div>
       </div>
@@ -21,23 +21,25 @@
 </template>
 
 <script>
-import Button from '../components/Button'
-import ProgressBarBox from '../components/ProgressBarBox'
+import Button from '@/components/Button'
+import ProgressBarBox from '@/components/ProgressBarBox'
 
-import http from '../services/http'
+import http from '@/services/http'
 
 export default {
   name: 'FindUser',
   components: { 'btn': Button, ProgressBarBox },
   data: () => ({
     request: false,
-    messageError: null
+    messageError: null,
+    username: ''
   }),
   methods: {
     async findRepositoriesByUser () {
       this.request = true
       await http.getRepositoriesByUser(() => {
         this.request = false
+        this.$router.push(`/${this.username}`)
       })
     }
   }
@@ -46,6 +48,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/style/variable';
+@import '../assets/style/common';
 
 .main {
   height: 70vh;
@@ -53,26 +56,18 @@ export default {
   justify-content: center;
   align-items: center;
 
-  &--label-input {
+  &__label-input {
     flex-direction: column;
   }
 
-  &--box {
+  &__box {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  &--btn {
+  &__btn {
     margin-top: 10px;
-  }
-
-  &--input {
-    padding: 5px 10px;
-    border: 2px solid $black-color;
-    color: $black-color;
-    width: 200px;
-    border-radius: $size-radius;
   }
 }
 </style>
