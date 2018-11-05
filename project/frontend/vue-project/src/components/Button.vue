@@ -10,16 +10,7 @@
 <script>
 export default {
   name: 'Button',
-  props: {
-    // onClick: {
-    //   type: Function,
-    //   required: true
-    // },
-    label: {
-      type: String,
-      required: true
-    }
-  }
+  props: ['label']
 }
 </script>
 
@@ -41,12 +32,12 @@ export default {
   &:hover {
     opacity: 0.7;
   }
+}
 
-  .icon-triangle {
-    margin-left: $size-radius;
-    border-top: $size-radius solid transparent;
-    border-left: $size-radius solid $white-color;
-    border-bottom: $size-radius solid transparent;
-  }
+.icon-triangle {
+  margin-left: $size-radius;
+  border-top: $size-radius solid transparent;
+  border-left: $size-radius solid $white-color;
+  border-bottom: $size-radius solid transparent;
 }
 </style>
