@@ -18,14 +18,14 @@ export default {
 @import '../assets/style/variable';
 
 .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
   background-color: $black-color;
+  bottom: 0;
   color: $white-color;
-  text-align: center;
+  left: 0;
   padding:  1em;
+  position: fixed;
+  text-align: center;
+  width: 100%;
 
   &__self-link {
     color: $white-color;
@@ -34,7 +34,7 @@ export default {
 }
 
 .heart:before {
-  content: '\2665';
   color: red;
+  content: '\2665';
 }
 </style>

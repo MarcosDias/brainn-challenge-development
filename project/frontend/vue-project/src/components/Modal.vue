@@ -63,10 +63,10 @@ export default {
 .modal {
   &__body {
     background: #fff;
-    width: 30%;
-    padding: 12px;
     display: flex;
     flex-direction: column;
+    padding: 12px;
+    width: 30%;
   }
 
   &__label {
@@ -78,10 +78,10 @@ export default {
   }
 
   &__buttons {
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   &__btn-save {
@@ -89,15 +89,15 @@ export default {
   }
 
   &__mask {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
     align-items: center;
     background-color: rgba($black-color, .4);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
   }
 }
 </style>

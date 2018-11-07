@@ -32,24 +32,23 @@ export default {
 
 .tag {
   @extend .input-style;
+  align-items: center;
   background-color: $black-color;
   color: $white-color;
-  font-size: .9em;
+  display: flex;
+  flex-direction: row;
+  font-size: .8em;
+  justify-content: space-between;
   margin-right: 4px;
   margin-top: 2px;
   margin-bottom: 2px;
   padding: 4px;
-  font-size: .8em;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
 
   &__close {
-    text-decoration: none;
     color: $white-color;
     cursor: pointer;
     font-weight: 700;
+    text-decoration: none;
     margin-left: 2px;
   }
 }

@@ -79,16 +79,16 @@ export default {
 @import '../assets/style/variable';
 
 table {
-  width: 100%;
   display: table;
+  width: 100%;
 
   th {
-    text-align: left;
     background-color: $black-color;
-    color: $white-color;
     border: $border-config;
     border-inline-end-color: $white-color;
+    color: $white-color;
     padding: $padding-table;
+    text-align: left;
   }
 
   th:last-child {

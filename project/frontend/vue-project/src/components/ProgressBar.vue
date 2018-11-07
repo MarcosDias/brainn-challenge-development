@@ -15,25 +15,25 @@ export default {
 
 .progress-bar {
   background-color: $black-color;
+  border-radius: $size-radius;
   height: 25px;
   width: 100%;
-  border-radius: $size-radius;
 }
 
 .progress-bar span {
-  display: inline-block;
-  height: 100%;
   border-radius: $size-radius;
   background-color: $black-color;
+  display: inline-block;
+  height: 100%;
 }
 
 .stripes span {
-  background-size: 60px 60px;
+  animation: animate-stripes 3s linear infinite;
   background-image: linear-gradient(135deg,
     rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%,
     rgba(255, 255, 255, .15) 50%,
     rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
-  animation: animate-stripes 3s linear infinite;
+  background-size: 60px 60px;
 }
 
 @keyframes animate-stripes {

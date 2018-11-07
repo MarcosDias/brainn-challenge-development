@@ -17,10 +17,10 @@ export default {
 
 .header {
   background: $black-color;
-  padding-top: 3vh;
-  padding-bottom: 3vh;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 3vh;
+  padding-top: 3vh;
 
   &__logo {
     color: $white-color;

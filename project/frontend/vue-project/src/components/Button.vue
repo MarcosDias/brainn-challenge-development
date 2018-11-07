@@ -18,16 +18,16 @@ export default {
 @import '../assets/style/variable';
 
 .btn {
-  display: flex;
   align-items: center;
-  box-shadow: 1px 1px 1px #000000;
   background: $black-color;
   border: none;
+  border-radius: $size-radius;
+  box-shadow: 1px 1px 1px #000000;
   color: $white-color;
+  cursor: pointer;
+  display: flex;
   font-size: 16px;
   padding: .5em 2em;
-  border-radius: $size-radius;
-  cursor: pointer;
 
   &:hover {
     opacity: 0.7;
@@ -35,9 +35,9 @@ export default {
 }
 
 .icon-triangle {
-  margin-left: $size-radius;
   border-top: $size-radius solid transparent;
   border-left: $size-radius solid $white-color;
   border-bottom: $size-radius solid transparent;
+  margin-left: $size-radius;
 }
 </style>

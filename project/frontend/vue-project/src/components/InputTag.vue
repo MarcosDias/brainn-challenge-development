@@ -47,15 +47,15 @@ export default {
 
 .input-tag {
   @extend .input-style;
-  padding: 2px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding: 2px;
 
   &__input {
-    border: none;
     color: $black-color;
     padding: 5px;
+    border: none;
   }
 }
 </style>

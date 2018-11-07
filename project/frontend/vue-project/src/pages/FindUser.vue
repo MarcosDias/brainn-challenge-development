@@ -51,19 +51,19 @@ export default {
 @import '../assets/style/common';
 
 .main {
-  height: 70vh;
-  display: flex;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  height: 70vh;
+  justify-content: center;
 
   &__label-input {
     flex-direction: column;
   }
 
   &__box {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
   }
 
   &__btn {
