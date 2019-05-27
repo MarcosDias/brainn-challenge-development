@@ -1,0 +1,24 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /javaspringpostgresql
+    
+spring:
+  application:
+    name: java-spring-postgres-project
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+integration:
+  github:
+    api: https://api.github.com/users/{username}/starred?sort=updated&direction=des

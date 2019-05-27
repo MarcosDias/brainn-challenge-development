@@ -11,6 +11,7 @@ public class JavaSpringPostgresProjectApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		JavaSpringPostgresProjectApplication.main(new String[] {});
 	}
 
 }
