@@ -24,7 +24,7 @@ public class LoadUserGithubService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<ProjectGitHubDTO> loadProjectStars(final String username) throws UserNotFoundGitHubException {
+	public List<ProjectGitHubDTO> loadProjectStarred(final String username) throws UserNotFoundGitHubException {
 		ProjectGitHubDTO[] response = null;
 
 		try {

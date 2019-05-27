@@ -19,7 +19,7 @@ public class LoadUserGithubServiceTest extends AbstractRestTest {
 
 	@Test
 	public void loadProjectStars_test() throws Exception {
-		List<ProjectGitHubDTO> projectStars = service.loadProjectStars(VALIDE_USER_GITHUB);
+		List<ProjectGitHubDTO> projectStars = service.loadProjectStarred(VALIDE_USER_GITHUB);
 
 		assertThat(projectStars)
 			.asList()
@@ -36,7 +36,7 @@ public class LoadUserGithubServiceTest extends AbstractRestTest {
 
 	@Test(expected = UserNotFoundGitHubException.class)
 	public void findProjectStars_test_error() throws Exception {
-		service.loadProjectStars(INVALIDE_USER_GITHUB);
+		service.loadProjectStarred(INVALIDE_USER_GITHUB);
 	}
 
 }
