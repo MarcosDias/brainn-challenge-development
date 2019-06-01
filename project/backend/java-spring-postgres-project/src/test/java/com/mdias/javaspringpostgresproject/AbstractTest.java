@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public abstract class AbstractRestTest {
+public abstract class AbstractTest {
 
 	protected static final String VALIDE_USER_GITHUB = "marcosdias";
 	protected static final String INVALIDE_USER_GITHUB = "anyNameNotValide";

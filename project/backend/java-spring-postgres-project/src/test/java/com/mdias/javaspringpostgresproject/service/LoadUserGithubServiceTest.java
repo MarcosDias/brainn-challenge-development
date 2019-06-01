@@ -8,11 +8,11 @@ import java.util.List;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.mdias.javaspringpostgresproject.AbstractRestTest;
+import com.mdias.javaspringpostgresproject.AbstractTest;
 import com.mdias.javaspringpostgresproject.dto.ProjectGitHubDTO;
 import com.mdias.javaspringpostgresproject.exception.UserNotFoundGitHubException;
 
-public class LoadUserGithubServiceTest extends AbstractRestTest {
+public class LoadUserGithubServiceTest extends AbstractTest {
 
 	@Autowired
 	private LoadUserGithubService service;
