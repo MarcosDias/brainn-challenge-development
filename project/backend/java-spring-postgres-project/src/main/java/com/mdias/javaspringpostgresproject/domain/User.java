@@ -14,11 +14,20 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
-@Builder
+@ToString
+@EqualsAndHashCode(exclude = "projectsStarred")
+@Builder(toBuilder = true)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
 @Table(name = "`user`")
 public class User {
@@ -34,6 +43,7 @@ public class User {
 	@Column(nullable = false, length = 150)
 	private String name;
 
+	@ToString.Exclude
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
 	private Set<ProjectStarred> projectsStarred;
 }

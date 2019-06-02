@@ -18,6 +18,9 @@ spring:
     properties:
       hibernate:
         format_sql: true
+      jdbc:
+        batch_size: 100
+      order_inserts: true
 
 integration:
   github:

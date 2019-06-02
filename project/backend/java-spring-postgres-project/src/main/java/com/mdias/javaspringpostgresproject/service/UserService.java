@@ -15,7 +15,7 @@ public class UserService {
 	private UserRepository repository;
 
 	public Optional<User> findByName(String username) {
-		return repository.findByNameLike(username);
+		return repository.findByName(username);
 	}
 
 	public User save(User user) {

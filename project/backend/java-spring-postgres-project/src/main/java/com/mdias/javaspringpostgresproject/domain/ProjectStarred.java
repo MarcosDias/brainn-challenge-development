@@ -1,6 +1,7 @@
 package com.mdias.javaspringpostgresproject.domain;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,22 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.mdias.javaspringpostgresproject.domain.User.UserBuilder;
+
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
-@Builder
+@ToString
+@EqualsAndHashCode(exclude = "user")
+@Builder(toBuilder = true)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 @Entity
 @Table(name = "projectstarred")
 public class ProjectStarred {
@@ -45,6 +57,7 @@ public class ProjectStarred {
 	@Column(length = 100)
 	private String language;
 
+	@ToString.Exclude
 	@ManyToOne
 	@JoinColumn(name = "user_id",  nullable = false)
 	private User user;

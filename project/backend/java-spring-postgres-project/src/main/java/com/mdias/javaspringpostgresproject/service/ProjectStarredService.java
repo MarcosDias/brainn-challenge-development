@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ public class ProjectStarredService {
 	@Autowired
 	private UserService userService;
 
+	@Transactional
 	public User loadUser(final String username) throws UserNotFoundGitHubException {
 
 		List<ProjectGitHubDTO> projectStarredGithub = loadUserGithubService.loadProjectStarred(username);

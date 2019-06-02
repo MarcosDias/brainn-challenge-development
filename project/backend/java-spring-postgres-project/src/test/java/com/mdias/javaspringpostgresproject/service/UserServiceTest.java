@@ -27,7 +27,7 @@ public class UserServiceTest extends AbstractTest {
 	@Test
 	public void findByName() {
 		
-		when(repository.findByNameLike(VALIDE_USER_GITHUB))
+		when(repository.findByName(VALIDE_USER_GITHUB))
 			.thenReturn(Optional.of(createFakeUser()));
 		
 		Optional<User> optUser = service.findByName(VALIDE_USER_GITHUB);
