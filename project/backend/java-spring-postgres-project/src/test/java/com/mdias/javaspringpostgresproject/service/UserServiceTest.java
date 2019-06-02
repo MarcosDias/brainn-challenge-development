@@ -37,7 +37,6 @@ public class UserServiceTest extends AbstractTest {
 			.get()
 			.hasFieldOrPropertyWithValue("id", 1L)
 			.hasFieldOrPropertyWithValue("name", VALIDE_USER_GITHUB)
-			.hasNoNullFieldsOrProperties()
 			;
 	}
 
@@ -55,7 +54,6 @@ public class UserServiceTest extends AbstractTest {
 			.isNotNull()
 			.hasFieldOrPropertyWithValue("id", 1L)
 			.hasFieldOrPropertyWithValue("name", VALIDE_USER_GITHUB)
-			.hasNoNullFieldsOrProperties()
 			;
 		
 	}
