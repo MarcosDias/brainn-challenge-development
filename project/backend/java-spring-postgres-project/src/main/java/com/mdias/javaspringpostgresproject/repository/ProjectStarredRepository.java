@@ -1,4 +1,4 @@
-package com.mdias.javaspringpostgresproject.repositry;
+package com.mdias.javaspringpostgresproject.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

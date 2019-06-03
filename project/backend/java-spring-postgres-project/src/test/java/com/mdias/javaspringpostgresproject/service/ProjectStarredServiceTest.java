@@ -23,7 +23,7 @@ import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
 import com.mdias.javaspringpostgresproject.domain.User;
 import com.mdias.javaspringpostgresproject.dto.ProjectGitHubDTO;
 import com.mdias.javaspringpostgresproject.exception.UserNotFoundGitHubException;
-import com.mdias.javaspringpostgresproject.repositry.ProjectStarredRepository;
+import com.mdias.javaspringpostgresproject.repository.ProjectStarredRepository;
 
 public class ProjectStarredServiceTest extends AbstractTest {
 	
