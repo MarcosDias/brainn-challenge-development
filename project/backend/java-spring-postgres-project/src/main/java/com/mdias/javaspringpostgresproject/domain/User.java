@@ -34,11 +34,11 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	protected Long id;
+	private Long id;
 
 	@Column
 	@CreationTimestamp
-	protected LocalDateTime createdDateTime;
+	private LocalDateTime createdDateTime;
 
 	@Column(nullable = false, length = 150)
 	private String name;

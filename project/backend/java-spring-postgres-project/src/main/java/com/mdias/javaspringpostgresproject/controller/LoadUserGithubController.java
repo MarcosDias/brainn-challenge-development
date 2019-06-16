@@ -1,7 +1,6 @@
 package com.mdias.javaspringpostgresproject.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +26,7 @@ public class LoadUserGithubController {
 	@PostMapping(value = "/{username}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<UserResource> loadUserGithub(@PathVariable final String username) throws UserNotFoundGitHubException {
 		User loadedUser = service.loadUser(username);
-		return new ResponseEntity<>(transformer.transform(loadedUser), HttpStatus.OK);
+		return ResponseEntity.ok(transformer.transform(loadedUser));
 	}
 
 }
