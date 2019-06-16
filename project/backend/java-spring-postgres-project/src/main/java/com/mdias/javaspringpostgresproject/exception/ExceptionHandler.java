@@ -11,7 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@org.springframework.web.bind.annotation.ExceptionHandler(UserNotFoundGitHubException.class)
+	@org.springframework.web.bind.annotation.ExceptionHandler({ 
+		ResourceNotFound.class,
+		UserNotFoundGitHubException.class 
+	})
 	public ResponseEntity<ErrorData> userNotFoundGitHub(Exception ex) {
 		return new ResponseEntity<>(new ErrorData(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
 	}

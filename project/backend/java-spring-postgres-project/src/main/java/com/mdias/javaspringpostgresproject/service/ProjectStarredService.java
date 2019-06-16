@@ -7,13 +7,18 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
 import com.mdias.javaspringpostgresproject.domain.User;
 import com.mdias.javaspringpostgresproject.dto.ProjectGitHubDTO;
+import com.mdias.javaspringpostgresproject.exception.ResourceNotFound;
 import com.mdias.javaspringpostgresproject.exception.UserNotFoundGitHubException;
-import com.mdias.javaspringpostgresproject.repositry.ProjectStarredRepository;
+import com.mdias.javaspringpostgresproject.repository.ProjectStarredRepository;
 import com.mdias.javaspringpostgresproject.transformer.impl.TransformerGitHubProjectToProject;
 
 @Service
@@ -47,6 +52,15 @@ public class ProjectStarredService {
 		projectStarredRepository.saveAll(listProjectsStar);
 
 		return user;
+	}
+
+	@Transactional
+	public Page<ProjectStarred> findProjectStar(String username, int page, int size) throws ResourceNotFound {
+
+		Optional<User> optUser = userService.findByName(username);
+		User user = optUser.orElseThrow(() -> new ResourceNotFound("Usur not found, sorry! :("));
+
+		return projectStarredRepository.findByUser(user, PageRequest.of(page, size, Sort.by(Direction.ASC, "name")));
 	}
 
 	private User getUserLoadedorCreateUser(String username) {
