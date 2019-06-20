@@ -16,6 +16,7 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 		UserNotFoundGitHubException.class 
 	})
 	public ResponseEntity<ErrorData> userNotFoundGitHub(Exception ex) {
+		log.error("[ userNotFoundGitHub ] - User not found: {}", ex);
 		return new ResponseEntity<>(new ErrorData(HttpStatus.NOT_FOUND, ex.getMessage()), HttpStatus.NOT_FOUND);
 	}
 
