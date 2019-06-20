@@ -26,8 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@ToString
-@EqualsAndHashCode(exclude = "user")
+@EqualsAndHashCode(exclude = { "user", "tags" })
 @Builder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
