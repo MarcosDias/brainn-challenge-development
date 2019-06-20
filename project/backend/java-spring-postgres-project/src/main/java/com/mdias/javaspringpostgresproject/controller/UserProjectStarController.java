@@ -1,10 +1,15 @@
 package com.mdias.javaspringpostgresproject.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,14 +18,17 @@ import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
 import com.mdias.javaspringpostgresproject.exception.ResourceNotFound;
 import com.mdias.javaspringpostgresproject.resource.PageResource;
 import com.mdias.javaspringpostgresproject.resource.ProjectStarredResource;
+import com.mdias.javaspringpostgresproject.resource.TagResource;
 import com.mdias.javaspringpostgresproject.service.ProjectStarredService;
+import com.mdias.javaspringpostgresproject.transformer.impl.TransformerProjectStarredToProjectStarredResource;
 import com.mdias.javaspringpostgresproject.transformer.impl.TransformerSetProjectStarredToSetProjectStarredResource;
 
 @RestController
 @RequestMapping("/user")
 public class UserProjectStarController {
 	
-	TransformerSetProjectStarredToSetProjectStarredResource transform = new TransformerSetProjectStarredToSetProjectStarredResource();
+	private TransformerSetProjectStarredToSetProjectStarredResource transformSetProject = new TransformerSetProjectStarredToSetProjectStarredResource();
+	private TransformerProjectStarredToProjectStarredResource transformProject = new TransformerProjectStarredToProjectStarredResource();
 
 	@Autowired
 	private ProjectStarredService service;
@@ -34,7 +42,7 @@ public class UserProjectStarController {
 		Page<ProjectStarred> pageProjectStar = service.findProjectStar(username, page, size);
 	
 		PageResource<ProjectStarredResource> pageResource = new PageResource<>(
-			transform.transform(pageProjectStar.getContent()), 
+				transformSetProject.transform(pageProjectStar.getContent()), 
 			pageProjectStar.getPageable().getPageNumber(), 
 			pageProjectStar.getPageable().getPageSize(), 
 			(int) pageProjectStar.getTotalElements(), 
@@ -44,15 +52,17 @@ public class UserProjectStarController {
 		return ResponseEntity.ok(pageResource);
 	}
 
-//	@PutMapping(value = "/{username}/projectstar/{projectId}/tags", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-//	public ResponseEntity<ProjectStarred> setTagInProjectStar(	
-//			@PathVariable final String username,
-//			@PathVariable final Long projectId,
-//			@RequestBody final List<Tag> tags) throws NotFoundException {
-//		
-//		ProjectStarred project = service.setTagInProjectStar(username, projectId, tags);
-//		
-//		return new ResponseEntity<>(project, HttpStatus.OK);
-//	}
+	@PutMapping(value = "/{username}/projectstarred/{projectId}/tags", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<ProjectStarredResource> setTagInProjectStar(	
+			@PathVariable final String username,
+			@PathVariable final Long projectId,
+			@RequestBody final List<TagResource> tags) throws ResourceNotFound {
+		
+		ProjectStarred project = service.setTagInProjectStarred(username, projectId, tags);
+		
+		ProjectStarredResource projectStarredResource = transformProject.transform(project);
+		
+		return ResponseEntity.ok(projectStarredResource);
+	}
 
 }

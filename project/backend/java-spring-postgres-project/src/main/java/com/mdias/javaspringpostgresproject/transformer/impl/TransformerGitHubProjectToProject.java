@@ -13,14 +13,13 @@ public class TransformerGitHubProjectToProject implements Transformer<List<Proje
 	@Override
 	public Set<ProjectStarred> transform(List<ProjectGitHubDTO> input) {
 		return input.stream()
-			.map(in -> {
-				return ProjectStarred.builder()
+			.map(in -> ProjectStarred.builder()
 					.githubId(in.getId())
 					.language(in.getLanguage())
 					.name(in.getName())
 					.url(in.getUrl())
-					.build();
-			}).collect(Collectors.toSet());
+					.build())
+			.collect(Collectors.toSet());
 	}
 
 }

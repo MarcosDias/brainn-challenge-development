@@ -9,6 +9,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
@@ -20,5 +23,10 @@ public abstract class AbstractTest {
 
 	@Autowired
 	protected MockMvc mvc;
+
+	protected <T> String toJson(T t) throws JsonProcessingException {
+		ObjectMapper mapper = new ObjectMapper();
+		return mapper.writeValueAsString(t);
+	}
 
 }

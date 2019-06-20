@@ -2,6 +2,7 @@ package com.mdias.javaspringpostgresproject.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
@@ -22,6 +23,7 @@ import com.mdias.javaspringpostgresproject.AbstractTest;
 import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
 import com.mdias.javaspringpostgresproject.domain.User;
 import com.mdias.javaspringpostgresproject.dto.ProjectGitHubDTO;
+import com.mdias.javaspringpostgresproject.exception.ResourceNotFound;
 import com.mdias.javaspringpostgresproject.exception.UserNotFoundGitHubException;
 import com.mdias.javaspringpostgresproject.repository.ProjectStarredRepository;
 
@@ -40,13 +42,19 @@ public class ProjectStarredServiceTest extends AbstractTest {
 	private ProjectStarredRepository projectStarredRepository; 
 	
 	@Before
-	public void setUp() throws UserNotFoundGitHubException {
+	public void setUp() throws UserNotFoundGitHubException, ResourceNotFound {
 
 		when(loadUserGithubService.loadProjectStarred(VALIDE_USER_GITHUB))
 			.thenReturn(createListFakeProjectGitHubDTO());
 		
-		when(userService.save(any(User.class)))
+		when(userService.create(anyString()))
 			.thenReturn(createFakeUser());
+		
+		when(userService.getUserLoaded(anyString()))
+			.thenReturn(createFakeUser());
+		
+		when(userService.getUserLoadedOrCreate(anyString()))
+		.thenReturn(createFakeUser());
 		
 		when(projectStarredRepository.saveAll(Mockito.anyList()))
 			.thenReturn(new ArrayList<ProjectStarred>());

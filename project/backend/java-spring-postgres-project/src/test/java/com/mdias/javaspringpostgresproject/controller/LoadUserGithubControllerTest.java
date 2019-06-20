@@ -9,9 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
 
 import com.mdias.javaspringpostgresproject.AbstractTest;
 
+@DirtiesContext(classMode = ClassMode.BEFORE_EACH_TEST_METHOD)
 public class LoadUserGithubControllerTest extends AbstractTest {
 
 	private String BASE_URL = "/loaduser";
@@ -51,5 +54,4 @@ public class LoadUserGithubControllerTest extends AbstractTest {
 				.andExpect(jsonPath("$.name", is("marcosdias")))
 				;
 	}
-
 }

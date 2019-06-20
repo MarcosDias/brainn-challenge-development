@@ -9,19 +9,13 @@ import com.mdias.javaspringpostgresproject.resource.ProjectStarredResource;
 import com.mdias.javaspringpostgresproject.transformer.Transformer;
 
 public class TransformerSetProjectStarredToSetProjectStarredResource implements Transformer<List<ProjectStarred>, List<ProjectStarredResource>> {
+	
+	private final TransformerProjectStarredToProjectStarredResource transformer = new TransformerProjectStarredToProjectStarredResource(); 
 
 	@Override
 	public List<ProjectStarredResource> transform(List<ProjectStarred> setInput) {
 		return setInput.stream()
-			.map(in -> ProjectStarredResource.builder()
-					.id(in.getId())
-					.createdDateTime(in.getCreatedDateTime())
-					.githubId(in.getGithubId())
-					.name(in.getName())
-					.description(in.getDescription())
-					.url(in.getUrl())
-					.language(in.getLanguage())
-					.build())
+			.map(transformer::transform)
 			.collect(toList());
 	}
 

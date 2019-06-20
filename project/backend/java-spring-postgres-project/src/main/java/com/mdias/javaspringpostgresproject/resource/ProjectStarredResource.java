@@ -1,6 +1,7 @@
 package com.mdias.javaspringpostgresproject.resource;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -16,5 +17,6 @@ public class ProjectStarredResource {
 	private String description;
 	private String url;
 	private String language;
+	private List<TagResource> tags;
 
 }

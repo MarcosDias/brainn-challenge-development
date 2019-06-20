@@ -14,23 +14,31 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
+import com.mdias.javaspringpostgresproject.domain.Tag;
 import com.mdias.javaspringpostgresproject.domain.User;
 import com.mdias.javaspringpostgresproject.dto.ProjectGitHubDTO;
 import com.mdias.javaspringpostgresproject.exception.ResourceNotFound;
 import com.mdias.javaspringpostgresproject.exception.UserNotFoundGitHubException;
 import com.mdias.javaspringpostgresproject.repository.ProjectStarredRepository;
+import com.mdias.javaspringpostgresproject.repository.TagRepository;
+import com.mdias.javaspringpostgresproject.resource.TagResource;
 import com.mdias.javaspringpostgresproject.transformer.impl.TransformerGitHubProjectToProject;
+import com.mdias.javaspringpostgresproject.transformer.impl.TransformerListTagResourceToListTag;
 
 @Service
 public class ProjectStarredService {
 
-	private static final TransformerGitHubProjectToProject transformer = new TransformerGitHubProjectToProject();
+	private static final TransformerGitHubProjectToProject transformerGithubProjectToProject = new TransformerGitHubProjectToProject();
+	private static final TransformerListTagResourceToListTag transformerResourceToTag = new TransformerListTagResourceToListTag();
 
 	@Autowired
 	private LoadUserGithubService loadUserGithubService;
 
 	@Autowired
 	private ProjectStarredRepository projectStarredRepository;
+
+	@Autowired
+	private TagRepository tagRepository;
 
 	@Autowired
 	private UserService userService;
@@ -40,9 +48,9 @@ public class ProjectStarredService {
 
 		List<ProjectGitHubDTO> projectStarredGithub = loadUserGithubService.loadProjectStarred(username);
 
-		Set<ProjectStarred> listProjectsStar = transformer.transform(projectStarredGithub);
+		Set<ProjectStarred> listProjectsStar = transformerGithubProjectToProject.transform(projectStarredGithub);
 
-		User user = getUserLoadedorCreateUser(username);
+		User user = userService.getUserLoadedOrCreate(username);
 
 		projectStarredRepository.deleteByUser(user);
 
@@ -57,24 +65,31 @@ public class ProjectStarredService {
 	@Transactional
 	public Page<ProjectStarred> findProjectStar(String username, int page, int size) throws ResourceNotFound {
 
-		Optional<User> optUser = userService.findByName(username);
-		User user = optUser.orElseThrow(() -> new ResourceNotFound("Usur not found, sorry! :("));
+		User user = userService.getUserLoaded(username);
 
 		return projectStarredRepository.findByUser(user, PageRequest.of(page, size, Sort.by(Direction.ASC, "name")));
 	}
 
-	private User getUserLoadedorCreateUser(String username) {
-		Optional<User> optUser = userService.findByName(username);
-		User user = null;
+	@Transactional
+	public ProjectStarred setTagInProjectStarred(String username, Long projectId, List<TagResource> tags) throws ResourceNotFound {
 
-		if (optUser.isPresent()) {
-			user = optUser.get();
-		} else {
-			user = User.builder().name(username).build();
-			user = userService.save(user);
+		User user = userService.getUserLoaded(username);
+		ProjectStarred project = getProjectStarred(projectId, user);
+
+		tagRepository.deleteByProjectStarred(project);
+		
+		if (!tags.isEmpty()) {
+			List<Tag> listTag = transformerResourceToTag.transform(tags);
+			listTag.forEach(t -> t.setProjectStarred(project));
+			tagRepository.saveAll(listTag);			
 		}
 
-		return user;
+		return projectStarredRepository.getOne(projectId);
+	}
+
+	private ProjectStarred getProjectStarred(Long projectId, User user) throws ResourceNotFound {
+		Optional<ProjectStarred> optProject = projectStarredRepository.findByIdAndUser(projectId, user);
+		return optProject.orElseThrow(() -> new ResourceNotFound("Project not found, sorry! :("));
 	}
 
 }
