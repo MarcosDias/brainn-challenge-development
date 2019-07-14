@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  app:
+    build:
+      context: .
+      # dockerfile: no-dependencies.dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - spring.profiles.active=prod
+      - spring.datasource.url=jdbc:postgresql://db/db-java-spring
+      - spring.datasource.username=postgres
+      - spring.datasource.password=postgres 
+      - spring.datasource.driverClassName=org.postgresql.Driver
+      - spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+    depends_on:
+      - db
+    links:
+      - db
+  db:
+    image: postgres
+    ports:
+     - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql
+    environment:
+      - POSTGRES_DB=db-java-spring
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres

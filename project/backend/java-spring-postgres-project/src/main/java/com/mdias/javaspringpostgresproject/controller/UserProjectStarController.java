@@ -44,8 +44,8 @@ public class UserProjectStarController {
 	@GetMapping(value = "/{username}/projectstarred", params = { "page", "size" })
 	public ResponseEntity<PageResource<ProjectStarredResource>> getListProjectStarred(
 			@PathVariable final String username, 
-			@RequestParam(name = "page", defaultValue = "1") final int page,
-			@RequestParam(name = "size", defaultValue = "10") final int size) throws ResourceNotFound {
+			@RequestParam(name = "page") final int page,
+			@RequestParam(name = "size") final int size) throws ResourceNotFound {
 
 		Page<ProjectStarred> pageProjectStar = service.findProjectStar(username, page, size);
 	
