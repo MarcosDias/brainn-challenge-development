@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mdias.javaspringpostgresproject.domain.ProjectStarred;
+import com.mdias.javaspringpostgresproject.exception.ErrorData;
 import com.mdias.javaspringpostgresproject.exception.ResourceNotFound;
 import com.mdias.javaspringpostgresproject.resource.PageResource;
 import com.mdias.javaspringpostgresproject.resource.ProjectStarredResource;
@@ -22,6 +23,9 @@ import com.mdias.javaspringpostgresproject.resource.TagResource;
 import com.mdias.javaspringpostgresproject.service.ProjectStarredService;
 import com.mdias.javaspringpostgresproject.transformer.impl.TransformerProjectStarredToProjectStarredResource;
 import com.mdias.javaspringpostgresproject.transformer.impl.TransformerSetProjectStarredToSetProjectStarredResource;
+
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("/user")
@@ -33,6 +37,10 @@ public class UserProjectStarController {
 	@Autowired
 	private ProjectStarredService service;
 
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Return list of project starred of user."),
+			@ApiResponse(code = 404, message = "Not Found", response = ErrorData.class) 
+	})
 	@GetMapping(value = "/{username}/projectstarred", params = { "page", "size" })
 	public ResponseEntity<PageResource<ProjectStarredResource>> getListProjectStarred(
 			@PathVariable final String username, 
@@ -52,6 +60,10 @@ public class UserProjectStarController {
 		return ResponseEntity.ok(pageResource);
 	}
 
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Project that had your tag list updated.", response = ProjectStarredResource.class),
+			@ApiResponse(code = 404, message = "Not Found", response = ErrorData.class) 
+	})
 	@PutMapping(value = "/{username}/projectstarred/{projectId}/tags", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<ProjectStarredResource> setTagInProjectStar(	
 			@PathVariable final String username,
